@@ -1,4 +1,6 @@
 <script setup>
+import { ref } from 'vue';
+const anoAtual = ref(new Date().getFullYear());
 
 </script>
 
@@ -9,7 +11,7 @@
         <!--end::To the end-->
         <!--begin::Copyright-->
         <strong>
-            Copyright &copy; 2014-2024&nbsp;
+            Copyright &copy; {{ anoAtual }}&nbsp;
             <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
         </strong>
         All rights reserved.

@@ -4,6 +4,12 @@ import AppFooter from '../Components/AppFooter.vue';
 import AppSidebar from '../Components/AppSidebar.vue';
 import AppContent from '../Components/AppContent.vue';
 
+import { Link } from '@inertiajs/vue3';
+
+const toggleSidebar = () => {
+    document.body.classList.toggle('sidebar-open');
+};
+
 
 </script>
 
@@ -16,9 +22,12 @@ export default {
             user3: '/dist/assets/img/user3-128x128.jpg',
             user8: '/dist/assets/img/user8-128x128.jpg',
         }
-    }
+    },
+
 }
 </script>
+
+
 
 <template>
     <!--begin::Body-->
@@ -166,14 +175,14 @@ export default {
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img :src="user2" class="user-image rounded-circle shadow" alt="User Image" />
-                            <span class="d-none d-md-inline">Alexander Pierce</span>
+                            <span class="d-none d-md-inline">{{ $page.props.auth.user.name }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                             <!--begin::User Image-->
                             <li class="user-header text-bg-secondary">
                                 <img :src="user2" class="rounded-circle shadow" alt="User Image" />
                                 <p>
-                                    Alexander Pierce - Web Developer
+                                    {{ $page.props.auth.user.name }}
                                     <small>Member since Nov. 2023</small>
                                 </p>
                             </li>
@@ -191,8 +200,9 @@ export default {
                             <!--end::Menu Body-->
                             <!--begin::Menu Footer-->
                             <li class="user-footer">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                <a href="#" class="btn btn-default btn-flat float-end">Sign out</a>
+                                <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                                <Link :href="route('logout')" method="post" as="button"
+                                    class="btn btn-default btn-flat float-end">Sair</Link>
                             </li>
                             <!--end::Menu Footer-->
                         </ul>
@@ -210,10 +220,10 @@ export default {
         <!--begin::App Main-->
         <main class="app-main">
             <!--begin::App Content Header-->
-            <AppContentHeader />
+            <slot name="header"></slot>
             <!--end::App Content Header-->
             <!--begin::App Content-->
-            <AppContent />
+            <slot></slot>
             <!--end::App Content-->
         </main>
         <!--end::App Main-->
